@@ -19,32 +19,34 @@ public class Commons
 {
     //===================================================
     // ExcelVBA マクロ呼び出し
+    // str_path : 呼び出すxlsmファイルのパス
+    // str_macro : 呼び出すExcelVBAマクロ名
+    // row_cnt : 対象の行数
+    // col_cnt : 対象の列数
+    // str_direct_path : 出力先の絶対パス
     //===================================================
-    public static void CallMacro(String path, String macro, int ap_cnt, int var_cnt, string direct_path)
+    public static void CallMacro(string str_xlsm_path, string str_macro, int row_cnt, int col_cnt, string str_direct_path)
     {
         // Excel.Application の新しいインスタンスを生成する
         var xlApp = new Microsoft.Office.Interop.Excel.Application();
         Microsoft.Office.Interop.Excel.Workbooks xlBooks;
 
-        //MessageBox.Show(direct_path);
         // xlApplication から WorkBooks を取得する
         // 既存の Excel ブックを開く
         var CurrentDirectory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        //path = CurrentDirectory + @"\" + path;
+
         xlBooks = xlApp.Workbooks;
 
-        if (System.IO.File.Exists(path) == true)
+        if (System.IO.File.Exists(str_xlsm_path) == true)
         {
+            // ブックを開く
+            xlBooks.Open(str_xlsm_path);
 
-            xlBooks.Open(path);
             // Excel を表示する
             xlApp.Visible = false;
 
             // マクロを実行する
-            // 標準モジュール内のTestメソッドに "Hello World" を引数で渡し実行
-            //xlApp.Run("work.xlsm!Test", "Hello World");
-            // Sheet1内のSheetTestメソッドを実行(引数なし)
-            xlApp.Run(macro, ap_cnt, var_cnt, direct_path);
+            xlApp.Run(str_macro, row_cnt, col_cnt, str_direct_path);
 
             // Excel を終了する
             xlBooks.Close();

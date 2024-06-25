@@ -14,6 +14,7 @@ using Microsoft.Office.Interop.Excel;
 // 2024/06/11 : 012020048D : 新規追加
 // 2024/06/15 : 012020048D : Task1 : File_Select() 追加
 // 2024/06/16 : 012020048D : Task1 : Folder_Select()追加
+// 2024/06/22 : 012020048D : Task1 : WorkFolder_Create()追加
 //===================================================
 
 public class Commons
@@ -113,6 +114,33 @@ public class Commons
 			return null;
 		}
 
+	}
+
+	//===================================================
+	// 作業フォルダ作成
+	// str_name : 作成するフォルダ名
+	//===================================================
+	public static string WorkFolder_Create(string str_folder_name)
+	{
+		string direct_path;
+		string return_path;
+
+		//フォルダ作成用の日付を取得する
+		var output_folder_date = DateTime.Now;
+		string folder_date = output_folder_date.ToString("yyyyMMdd");
+		string folder_time = output_folder_date.ToString("HHmmss");
+		string folder_name = str_dir_name + folder_date + folder_time;
+
+		//出力用フォルダの作成
+		System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(System.IO.Directory.GetCurrentDirectory());
+		//var CurrentDirectory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+		di.CreateSubdirectory(folder_name);
+
+		direct_path = Convert.ToString(di);
+
+		return_path = direct_path + @"\" + folder_name;
+
+		return return_path;
 	}
 
 }

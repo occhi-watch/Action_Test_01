@@ -106,13 +106,13 @@ internal static class CsvToXlsx
 
                     }
 
-
                     // 回数分ループ
                     for (int line_cnt = 0; line_cnt < len_max; line_cnt++)
                     {
                         // 1行読み出す
                         Ex_line = sr.ReadLine();
 
+                        // 読みだした行が空白ではない場合
                         if (Ex_line != null)
                         {
 
@@ -251,6 +251,7 @@ internal static class CsvToXlsx
                                 }
                             }
                         }
+                        // 読みだした行が空白の場合 
                         else
                         {
                             var fileInfo = new FileInfo(output_xlsx_name);
@@ -271,9 +272,9 @@ internal static class CsvToXlsx
                     output_xlsx?.Dispose();
                 }
 
-
             }
 
+            // ファイルを閉じる
             sr?.Close();
         }
 

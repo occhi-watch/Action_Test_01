@@ -13,6 +13,7 @@ using Microsoft.Office.Interop.Excel;
 //===================================================
 // 2024/06/11 : 012020048D : 新規追加
 // 2024/06/15 : 012020048D : Task1 : File_Select() 追加
+// 2024/06/16 : 012020048D : Task1 : Folder_Set()追加
 //===================================================
 
 public class Commons
@@ -63,6 +64,44 @@ public class Commons
 
 			//OKボタンがクリックされたとき、選択されたファイル名を表示する
 			output_file = open_ofd.FileName;
+			return output_file;
+
+		}
+		else
+		{
+			//「いいえ」が選択された時
+			err_txt = "操作がキャンセルされました。";
+			MessageBox.Show(err_txt);
+			return null;
+		}
+
+	}
+
+	//===================================================
+	// フォルダ選択
+	// pop_msg : 表示させるメッセージ
+	//===================================================
+	static public string Folder_Select(string pop_msg)
+	{
+		string err_txt;
+		string output_file;
+
+		// 出力テンプレートを開く
+		FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+
+		// ダイアログの説明文
+		folderBrowserDialog.Description = pop_msg;
+
+
+		// 「新しいフォルダーの作成する」ボタンを表示する（デフォルトはtrue）
+		folderBrowserDialog.ShowNewFolderButton = false;
+
+		//ダイアログを表示する
+		if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+		{
+
+			//OKボタンがクリックされたとき、選択されたファイル名を表示する
+			output_file = folderBrowserDialog.SelectedPath;
 			return output_file;
 
 		}

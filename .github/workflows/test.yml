@@ -4,7 +4,7 @@ on:
     paths: ['go/**/*.go']              # ただしGoのファイル変更時のみ
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4      # ステップ1: チェックアウト
       - uses: actions/setup-go@v5      # ステップ2: 言語セットアップ

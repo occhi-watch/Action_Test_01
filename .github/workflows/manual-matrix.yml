@@ -9,6 +9,8 @@ jobs:
             version: 20
           - os: macos-latest   # パターン2
             version: 18
+          - os: windows-latest   # パターン3
+            version: 21
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/setup-node@v4

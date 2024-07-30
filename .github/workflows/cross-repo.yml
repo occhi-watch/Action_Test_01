@@ -1,7 +1,7 @@
 name: Cross repo
 on: push
 env:
-  TARGET_REPO: another-repo # GitHub Appsのインストール時に設定したリポジトリ
+  TARGET_REPO: Spoon-Knife # GitHub Appsのインストール時に設定したリポジトリ
 jobs:
   checkout:
     runs-on: ubuntu-latest
